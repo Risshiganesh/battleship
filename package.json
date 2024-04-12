@@ -4,9 +4,10 @@
   "description": "Project: Battleship",
   "private": true,
   "scripts": {
-    "test": "test",
+    "test": "jest",
     "build": "webpack",
     "watch": "webpack --watch",
+    "jest": "jest --watchAll",
     "ghpages": "git subtree push --prefix dist origin gh-pages"
   },
   "keywords": [],
