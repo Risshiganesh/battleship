@@ -67,9 +67,9 @@ describe("Test gameboard's placeShip method", function () {
     
             
     
-            gameboard.placeShip(coordinates,direction,shipObject)
+            const result = gameboard.placeShip(coordinates,direction,shipObject)
     
-    
+            expect(result).toBe("Placement_failed");
     
             expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(undefined)
     
@@ -103,7 +103,7 @@ describe("Test gameboard's placeShip method", function () {
 
     
 
-    test("Test placeShip() if direction is south", function () {
+    test("Test placeShip() if direction is south and ship length: 4", function () {
 
         const gameboard = createGameboard()
         
@@ -114,14 +114,15 @@ describe("Test gameboard's placeShip method", function () {
 
         const direction = "south";
 
-        const shipObject = createShip(3);
+        const shipObject = createShip(4);
 
         gameboard.placeShip(coordinates,direction,shipObject)
 
         expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(shipObject)
         expect(gameboard.ownGrid[coordinates.x][1]).toEqual(shipObject)
         expect(gameboard.ownGrid[coordinates.x][2]).toEqual(shipObject)
-        expect(gameboard.ownGrid[coordinates.x][3]).toEqual(undefined)
+        expect(gameboard.ownGrid[coordinates.x][3]).toEqual(shipObject)
+        expect(gameboard.ownGrid[coordinates.x][4]).toEqual(undefined)
 
 
        
@@ -140,14 +141,15 @@ describe("Test gameboard's placeShip method", function () {
 
         const direction = "east";
 
-        const shipObject = createShip(3);
+        const shipObject = createShip(2);
 
         gameboard.placeShip(coordinates,direction,shipObject)
 
         expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(shipObject)
         expect(gameboard.ownGrid[1][coordinates.y]).toEqual(shipObject)
-        expect(gameboard.ownGrid[2][coordinates.y]).toEqual(shipObject)
-        expect(gameboard.ownGrid[3][coordinates.y]).toEqual(shipObject)
+        expect(gameboard.ownGrid[2][coordinates.y]).toEqual(undefined)
+        expect(gameboard.ownGrid[3][coordinates.y]).toEqual(undefined)
+        expect(gameboard.ownGrid[4][coordinates.y]).toEqual(undefined)
 
 
        
@@ -171,6 +173,32 @@ describe("Test gameboard's placeShip method", function () {
         gameboard.placeShip(coordinates,direction,shipObject)
 
         expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(undefined)
+
+
+
+       
+
+    })
+
+    test("Test placeShip() if direction is west", function () {
+
+        const gameboard = createGameboard()
+        
+        const coordinates = {
+            x: 9,
+            y: 0
+        }
+
+        const direction = "west";
+
+        const shipObject = createShip(3);
+
+        gameboard.placeShip(coordinates,direction,shipObject)
+
+        expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(shipObject)
+        expect(gameboard.ownGrid[coordinates.x-1][coordinates.y]).toEqual(shipObject)
+        expect(gameboard.ownGrid[coordinates.x-2][coordinates.y]).toEqual(shipObject)
+        expect(gameboard.ownGrid[0][5]).toEqual(undefined)
 
 
 
@@ -451,6 +479,20 @@ describe("Test getCoordinates function", function () {
             
             expect(getCoordinates(coordinates,direction,shipObject).validity).toBe(expectedValidity.x5y5)
             expect(getCoordinates(coordinates,direction,shipObject).potentialCoordinates).toEqual(expectedCoords.coords5)
+        })
+
+        test("Ship length is 2 and coords: x:0, y:0",function () {
+            const coordinates = {
+                x: 0,
+                y: 0
+            }
+
+            const shorterCoords = [[0,0],[1,0]]
+
+            const smallerShip = createShip(2)
+
+            expect(getCoordinates(coordinates,direction,smallerShip).validity).toBe(true)
+            expect(getCoordinates(coordinates,direction,smallerShip).potentialCoordinates).toEqual(shorterCoords)
         })
     
     

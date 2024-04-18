@@ -3,17 +3,18 @@ function createGameboard(){
 
     function createOwnGrid () {
 
-        const rows = []
-
-        rows.length = 10;
+        
 
         const gridSize = 10;
 
-        for (let index = 0; index < gridSize - 1; index++) {
+        for (let index = 0; index < gridSize; index++) {
+            const rows = []
+            rows.length = 10;
+
             ownGrid[index] = rows
         }
 
-        ownGrid.push(rows)
+        // ownGrid.push(rows)
 
         // should each grid have an object with coords? x and y?
     }
@@ -25,16 +26,24 @@ function createGameboard(){
 
         const potentialCoords = getCoordinates(coordinates, direction, shipObject)
 
+        let placementMsg = "Placement_success"
+
         
         if (!potentialCoords.validity) {
-            return
+            placementMsg = "Placement_failed"
+            return placementMsg
         }
 
-        potentialCoords.potentialCoordinates.forEach(coordinates => {
-            ownGrid[coordinates[0]][coordinates[1]] = shipObject
-        });
+        // This is problematic
+        potentialCoords.potentialCoordinates.forEach(coords => {
 
-       
+            ownGrid[coords[0]][coords[1]] = shipObject;
+
+
+        });
+  
+
+       return placementMsg
         
     }
     
