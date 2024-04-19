@@ -1,4 +1,4 @@
-import {createGameboard, getCoordinates} from './gameboardFactory';
+import {createGameboard, getCoordinates, checkPlacementValidity} from './gameboardFactory';
 import { createShip } from './shipFactory';
 
 describe('Test gameboard factory',function () {
@@ -130,7 +130,7 @@ describe("Test gameboard's placeShip method", function () {
     });
 
 
-    test("Test placeShip() if direction is east", function () {
+    test("Test placeShip() if direction is east and ship length: 2", function () {
 
         const gameboard = createGameboard()
         
@@ -157,7 +157,7 @@ describe("Test gameboard's placeShip method", function () {
     });
 
 
-    test("Test placeShip() if direction is west", function () {
+    test("Test placeShip() if direction is west and ship length: 1", function () {
 
         const gameboard = createGameboard()
         
@@ -168,11 +168,11 @@ describe("Test gameboard's placeShip method", function () {
 
         const direction = "west";
 
-        const shipObject = createShip(3);
+        const shipObject = createShip(1);
 
         gameboard.placeShip(coordinates,direction,shipObject)
 
-        expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(undefined)
+        expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(shipObject)
 
 
 
@@ -180,7 +180,27 @@ describe("Test gameboard's placeShip method", function () {
 
     })
 
-    test("Test placeShip() if direction is west", function () {
+
+    test("Test placeShip() if direction is west and ship length: 6", function () {
+
+        const gameboard = createGameboard()
+        
+        const coordinates = {
+            x: 0,
+            y: 0
+        }
+
+        const direction = "west";
+
+        const shipObject = createShip(6);
+
+        gameboard.placeShip(coordinates,direction,shipObject);
+
+        expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(undefined);      
+
+    })
+
+    test("Test placeShip() if direction is west and ship length: 11", function () {
 
         const gameboard = createGameboard()
         
@@ -191,30 +211,72 @@ describe("Test gameboard's placeShip method", function () {
 
         const direction = "west";
 
-        const shipObject = createShip(3);
+        const shipObject = createShip(11);
 
         gameboard.placeShip(coordinates,direction,shipObject)
 
-        expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(shipObject)
-        expect(gameboard.ownGrid[coordinates.x-1][coordinates.y]).toEqual(shipObject)
-        expect(gameboard.ownGrid[coordinates.x-2][coordinates.y]).toEqual(shipObject)
-        expect(gameboard.ownGrid[0][5]).toEqual(undefined)
+        expect(gameboard.ownGrid[coordinates.x][coordinates.y]).toEqual(undefined)
+        expect(gameboard.ownGrid[coordinates.x-1][coordinates.y]).toEqual(undefined)
+        expect(gameboard.ownGrid[coordinates.x-2][coordinates.y]).toEqual(undefined)
+        expect(gameboard.ownGrid[coordinates.x-3][coordinates.y]).toEqual(undefined)
 
 
 
        
 
     })
+
+    
 })
 
 
-// Put this in its own describe block later
 
-test.skip("Test receiveAttack method", function () {
+describe("Placement fails if ship coords overlaps a pre-existing one", function () {
+
+    const gameboard = createGameboard()
+
+    const direction = "north"
+    
+    test("If both placement is x:5, y:5", function () {
+        const coordinates = {
+            x: 5,
+            y: 5
+        }
+
+        const shipObject1 = createShip(3);
+        const shipObject2 = createShip(2)
+
         
-    expect().toBe()
+        expect(gameboard.placeShip(coordinates,direction,shipObject1)).toBe("Placement_success");
+        expect(gameboard.placeShip(coordinates,direction,shipObject2)).toBe("Placement_failed");
+    })
+
+    test("Placement validity function works correctly", function () {
+        const coordinates = {
+            x: 9,
+            y: 9
+        }
+
+        const shipObject1 = createShip(3);
+        // const shipObject2 = createShip(2);
+
+        const coordsData1 = getCoordinates(coordinates,direction,shipObject1);
+        // const coordsData2 = getCoordinates(coordinates,direction,shipObject2);
+
+        expect(coordsData1.validity).toBe(true);
+        // expect(coordsData2.validity).toBe(true);
+
+        expect(checkPlacementValidity(coordsData1.validity, coordsData1.potentialCoordinates,gameboard.ownGrid)).toBe(true);
+        expect(gameboard.placeShip(coordinates,direction,shipObject1)).toBe("Placement_success");
+
+        
+        expect(checkPlacementValidity(coordsData1.validity, coordsData1.potentialCoordinates,gameboard.ownGrid)).toBe(false)
+       
+        // expect(gameboard.placeShip(coordinates,direction,shipObject2)).toBe("Placement_failed");
+    })
 
 })
+
 
 
 describe("Test getCoordinates function", function () {
@@ -589,7 +651,79 @@ describe("Test getCoordinates function", function () {
         
     })
     
+
+
+})
+
+
+
+describe("Test receiveAttack method", function () {
+
+    const gameboard = createGameboard();
+    const coordinates = {
+        x: 5,
+        y: 5
+    }
+
+    const ship1 = createShip(4);
+
+    gameboard.placeShip(coordinates,"north",ship1)
     
+    // Put this in its own describe block later
+
+    test("Test if coordinates is x:0, y:0 to be a miss", function () {
+            
+        expect(gameboard.receiveAttack(0,0)).toBe("Miss")
+
+    })
+
+    
+    test("Test if coordinates is x:0, y:0 returns Already Miss", function () {
+            
+        expect(gameboard.receiveAttack(0,0)).toBe("Already Miss")
+
+    })
 
 
+    test("Test if coordinates is x:5, y:5 to be a hit", function () {
+        const result = gameboard.receiveAttack(5,5)
+        expect(result).toBe("Hit");
+        expect(ship1.getHits()).toBe(1)
+        gameboard.receiveAttack(5,4)
+        expect(ship1.getHits()).toBe(2)
+        
+
+    })
+
+    test("If ship is sunk", function () {
+        gameboard.receiveAttack(5,3)
+        gameboard.receiveAttack(5,2);
+        expect(ship1.isSunk()).toBe(true)
+    })
+
+    test("Coordinates is x:5, y:4 should  not a hit because already hit", function () {
+            
+        expect(gameboard.receiveAttack(5,4)).toBe("Already Hit")
+        expect(gameboard.ownGrid[5][4].getHits()).toBe(4)
+
+    })
+
+    test("Test if coordinates is x:5, y:6 to be a Miss", function () {
+            
+        expect(gameboard.receiveAttack(5,6)).toBe("Miss")
+
+    })
+
+})
+
+describe("Check if all ships sunk", function () {
+
+    const gameboard = createGameboard();
+
+    const coordinates = {
+        coords1: [5,5],
+        coords2: [3,3]
+    }
+    // gameboard.placeShip()
+    expect()
 })

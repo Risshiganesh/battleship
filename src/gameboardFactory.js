@@ -1,9 +1,10 @@
 function createGameboard(){
-    const ownGrid = [];
+    const ownGrid = createGrid();
+    const hitMap = createGrid();
 
-    function createOwnGrid () {
+    function createGrid () {
 
-        
+        const newGrid = [];
 
         const gridSize = 10;
 
@@ -11,12 +12,10 @@ function createGameboard(){
             const rows = []
             rows.length = 10;
 
-            ownGrid[index] = rows
+            newGrid[index] = rows
         }
 
-        // ownGrid.push(rows)
-
-        // should each grid have an object with coords? x and y?
+        return newGrid;
     }
 
 
@@ -24,18 +23,27 @@ function createGameboard(){
     function placeShip (coordinates, direction, shipObject) {
 
 
-        const potentialCoords = getCoordinates(coordinates, direction, shipObject)
-
+        const potentialCoords = getCoordinates(coordinates, direction, shipObject);
+        const generatedCoords = potentialCoords.potentialCoordinates;
+        let placementValidity = potentialCoords.validity;
         let placementMsg = "Placement_success"
 
         
-        if (!potentialCoords.validity) {
+        
+
+    //    Checks if overlapping ships exist
+        placementValidity = checkPlacementValidity(placementValidity, generatedCoords, ownGrid);
+    
+        
+
+        if (!placementValidity) {
             placementMsg = "Placement_failed"
             return placementMsg
         }
 
-        // This is problematic
-        potentialCoords.potentialCoordinates.forEach(coords => {
+
+
+        generatedCoords.forEach(coords => {
 
             ownGrid[coords[0]][coords[1]] = shipObject;
 
@@ -46,12 +54,34 @@ function createGameboard(){
        return placementMsg
         
     }
+
+    function receiveAttack (x, y) {
+
+        if (hitMap[x][y] === "Miss") {
+            return "Already Miss"
+        }
+
+        if (!ownGrid[x][y]) {
+            hitMap[x][y] = "Miss"
+            return "Miss"
+        }
+
+
+        if (hitMap[x][y] === "Hit") {
+            return "Already Hit";
+        }
+
+        const ship = ownGrid[x][y];
+        ship.hit()
+        hitMap[x][y] = 'Hit';
+        return "Hit"
+    }
     
-    createOwnGrid()
 
     return {
         ownGrid,
-        placeShip
+        placeShip,
+        receiveAttack
     }
 
 
@@ -124,7 +154,33 @@ function getCoordinates (coordinates, direction, shipObject) {
 }
 
 
+
+function checkPlacementValidity (placementValidity, generatedCoords, ownGrid) {
+
+    if (!placementValidity) {
+        return placementValidity
+    }
+
+    for (let index = 0; index < generatedCoords.length; index++) {
+
+
+        const coords = generatedCoords[index];
+   
+        const ship = ownGrid[coords[0]][coords[1]]
+
+        if (ship) {
+            placementValidity = false;
+            break;
+        }
+
+    }
+
+    return placementValidity
+}
+
+
 export{
     createGameboard,
-    getCoordinates
+    getCoordinates,
+    checkPlacementValidity
 }
