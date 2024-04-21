@@ -10,3 +10,63 @@ body{
     width: 100%;
     background-color: black;
 }
+
+.main-container {
+
+    width: 100%;
+    height: 100%;
+    border: 2px solid red;
+    display: grid;
+    grid-template-rows: 200px 1fr 50px;
+}
+
+.header-div {
+    width: 100%;
+    height: 100%;
+    border: 2px solid blue;
+}
+
+.player-div {
+    width: 100%;
+    height: 100%;
+    border: 2px solid pink;
+    /* background-color: yellow; */
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr))
+
+}
+
+.footer-div {
+    width: 100%;
+    height: 100%;
+    border: 2px solid green;
+}
+
+
+
+.player1-div {
+    width: 100%;
+    height: 100%;
+    border: 2px lightgreen;
+    text-align: center;
+    color: white;
+}
+
+.player2-div {
+    width: 100%;
+    height: 100%;
+    border: 2px solid lightgoldenrodyellow;
+    text-align: center;
+    color: white;
+}
+
+
+@media (max-width: 770px){
+    .player1-div{
+        order: 2;
+    }
+    .player2-div{
+        order: 1;
+    }
+
+}
