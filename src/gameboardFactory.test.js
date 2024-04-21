@@ -258,21 +258,17 @@ describe("Placement fails if ship coords overlaps a pre-existing one", function 
         }
 
         const shipObject1 = createShip(3);
-        // const shipObject2 = createShip(2);
 
         const coordsData1 = getCoordinates(coordinates,direction,shipObject1);
-        // const coordsData2 = getCoordinates(coordinates,direction,shipObject2);
 
         expect(coordsData1.validity).toBe(true);
-        // expect(coordsData2.validity).toBe(true);
+
 
         expect(checkPlacementValidity(coordsData1.validity, coordsData1.potentialCoordinates,gameboard.ownGrid)).toBe(true);
-        expect(gameboard.placeShip(coordinates,direction,shipObject1)).toBe("Placement_success");
-
-        
+        expect(gameboard.placeShip(coordinates,direction,shipObject1)).toBe("Placement_success");       
         expect(checkPlacementValidity(coordsData1.validity, coordsData1.potentialCoordinates,gameboard.ownGrid)).toBe(false)
        
-        // expect(gameboard.placeShip(coordinates,direction,shipObject2)).toBe("Placement_failed");
+
     })
 
 })
@@ -721,9 +717,39 @@ describe("Check if all ships sunk", function () {
     const gameboard = createGameboard();
 
     const coordinates = {
-        coords1: [5,5],
-        coords2: [3,3]
+        coords1: {
+            x:5,
+            y:5
+        },
+        coords2: {
+            x:3,
+            y:3
+        },
+        coords3: {
+            x:7,
+            y:7
+        }
     }
-    // gameboard.placeShip()
-    expect()
+
+    const ship1 = createShip(3);
+    const ship2 = createShip(2);
+
+
+
+    gameboard.placeShip(coordinates.coords1,"north",ship1)
+    gameboard.placeShip(coordinates.coords2,"north",ship2)
+    expect(gameboard.allSunk()).toBe(false)
+
+    expect(gameboard.receiveAttack(5,5)).toBe("Hit")
+    expect(gameboard.receiveAttack(5,4)).toBe("Hit")
+    expect(gameboard.receiveAttack(5,3)).toBe("Hit")
+    expect(gameboard.receiveAttack(5,2)).toBe("Miss")
+
+    expect(gameboard.allSunk()).toBe(false)
+
+    expect(gameboard.receiveAttack(3,3)).toBe("Hit")
+    expect(gameboard.receiveAttack(3,2)).toBe("Hit");
+
+    expect(gameboard.allSunk()).toBe(true)
+    
 })

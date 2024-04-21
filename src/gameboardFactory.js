@@ -1,6 +1,7 @@
 function createGameboard(){
     const ownGrid = createGrid();
     const hitMap = createGrid();
+    const placedShips = [];
 
     function createGrid () {
 
@@ -49,6 +50,9 @@ function createGameboard(){
 
 
         });
+
+
+        placedShips.push(shipObject)
   
 
        return placementMsg
@@ -76,12 +80,30 @@ function createGameboard(){
         hitMap[x][y] = 'Hit';
         return "Hit"
     }
+
+    function allSunk () {
+
+        let everyShipSunk = true;
+
+        for (let index = 0; index < placedShips.length; index++) {
+            const ship = placedShips[index];
+
+            if (!ship.isSunk()) {
+                everyShipSunk = false;
+                break;
+            }
+            
+        }
+
+        return everyShipSunk
+    }
     
 
     return {
         ownGrid,
         placeShip,
-        receiveAttack
+        receiveAttack,
+        allSunk
     }
 
 
