@@ -714,6 +714,7 @@ describe("Test receiveAttack method", function () {
 
 describe("Check if all ships sunk", function () {
 
+
     const gameboard = createGameboard();
 
     const coordinates = {
@@ -734,22 +735,36 @@ describe("Check if all ships sunk", function () {
     const ship1 = createShip(3);
     const ship2 = createShip(2);
 
-
-
     gameboard.placeShip(coordinates.coords1,"north",ship1)
     gameboard.placeShip(coordinates.coords2,"north",ship2)
-    expect(gameboard.allSunk()).toBe(false)
 
-    expect(gameboard.receiveAttack(5,5)).toBe("Hit")
-    expect(gameboard.receiveAttack(5,4)).toBe("Hit")
-    expect(gameboard.receiveAttack(5,3)).toBe("Hit")
-    expect(gameboard.receiveAttack(5,2)).toBe("Miss")
+    test("Ships not attacked and all not sunk", function () {
+        
+        expect(gameboard.allSunk()).toBe(false)
 
-    expect(gameboard.allSunk()).toBe(false)
+    })
 
-    expect(gameboard.receiveAttack(3,3)).toBe("Hit")
-    expect(gameboard.receiveAttack(3,2)).toBe("Hit");
 
-    expect(gameboard.allSunk()).toBe(true)
+    test("First ship sunk but allSunk() should return false", function () {
+
+        expect(gameboard.receiveAttack(5,5)).toBe("Hit")
+        expect(gameboard.receiveAttack(5,4)).toBe("Hit")
+        expect(gameboard.receiveAttack(5,3)).toBe("Hit")
+        expect(gameboard.receiveAttack(5,2)).toBe("Miss")
+    
+        expect(gameboard.allSunk()).toBe(false)
+
+    })
+
+   
+    test("Second ship sunk allSunk() should return true",function () {
+        
+        expect(gameboard.receiveAttack(3,3)).toBe("Hit")
+        expect(gameboard.receiveAttack(3,2)).toBe("Hit");
+
+        expect(gameboard.allSunk()).toBe(true)
+    })
+
+    
     
 })
