@@ -13,6 +13,8 @@ body{
 
 .main-container {
 
+    /* Have a minimum height and width for .player-div */
+
     width: 100%;
     height: 100%;
     border: 2px solid red;
@@ -43,29 +45,81 @@ body{
 }
 
 
+.player1-div,
+.player2-div{
+    padding: 20px;
+    gap: 15px;
+}
+
 
 .player1-div {
     width: 100%;
     height: 100%;
     border: 2px lightgreen;
-    text-align: center;
-    color: white;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    /* text-align: center; */
+    /* color: white; */
 }
 
 .player2-div {
     width: 100%;
     height: 100%;
     border: 2px solid lightgoldenrodyellow;
-    text-align: center;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    /* text-align: center; */
+    /* color: white; */
+}
+
+
+.player1-grid,
+.player2-grid{
+
+    --height-and-width: max(350px, 30vw);
+    --border-size: 2px solid greenyellow;
+
+    border: var(--border-size);
+    width: var(--height-and-width);
+    height: var(--height-and-width);
+
+}
+
+
+.player1-label,
+.player2-label{
     color: white;
+    width: 100%;
+    border: 2px solid blanchedalmond;
+    text-align: center;
+    /* padding: 10px; */
 }
 
 
 @media (max-width: 770px){
+    /* change player font position */
+
+    .player1-grid,
+    .player2-grid{
+        /* border: 2px solid greenyellow; */
+        width: 350px;
+        height: 350px;
+
+    }
     .player1-div{
         order: 2;
     }
     .player2-div{
+        order: 1;
+    }
+
+    .player2-grid{
+        order: 2;
+    }
+
+    .player2-label{
         order: 1;
     }
 
