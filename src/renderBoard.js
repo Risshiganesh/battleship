@@ -1,5 +1,7 @@
 import { currentTurn, turnState } from "./gameFlow";
 
+import { updateHeader } from "./renderDOM";
+
 // How do you render the board?
 
 // select the player border grids first.
@@ -256,9 +258,7 @@ function displayHitMap(player,playerDOMGrid) {
 }
 
 
-function updateHeader (params) {
-    
-}
+
 
 
 
@@ -273,14 +273,20 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
         if (gameIsOver) {
 
-            console.log("Game is over")
+            // console.log("Game is over")
+
+            updateHeader("Game is over");
             return
         }
 
-        console.log(currentPlayerTurn)
+        // console.log(currentPlayerTurn)
+
+        updateHeader(`It is ${currentPlayerTurn}'s turn.`)
         if (isPlayer === currentPlayerTurn) {
             // turnState.updateTurn()
-            console.log("Not your own board!")
+            // console.log("Not your own board!")
+
+            updateHeader("Not your own board!");
             return
         }
 
@@ -292,13 +298,19 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         console.log(player.board.hitMap[x][y])
 
         if (player.board.hitMap[x][y] === "Miss" || player.board.hitMap[x][y] === "Hit") {
-            console.log("Grid already chosen")
+            // console.log("Grid already chosen")
+
+            updateHeader("Grid already chosen");
             return;
         }
 
 
-        player.board.receiveAttack(x,y)
-        turnState.updateTurn()
+        const result = player.board.receiveAttack(x,y);
+
+        updateHeader(`${currentPlayerTurn} chose x: ${x} and y: ${y} and it's a ${result.toLowerCase()}`);
+
+        turnState.updateTurn();
+
         if (player.board.ownGrid[x][y]) {
   
             grid.classList.add('ship-is-hit')

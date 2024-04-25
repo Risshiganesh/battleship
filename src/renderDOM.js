@@ -59,7 +59,15 @@ function createDOM () {
     // Create board div, make sure there is minimum size for height and width
 }
 
+
+function updateHeader (statusMessage) {
+    const statusDisplay = document.querySelector('.header-div');
+
+    statusDisplay.textContent = statusMessage
+}
+
 export {
-    createDOM
+    createDOM,
+    updateHeader
 }
 

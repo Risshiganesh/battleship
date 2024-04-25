@@ -1,6 +1,7 @@
 import { createPlayer } from "./playerFactory";
 import { createShip } from "./shipFactory";
 import { populatePlayer1Board, populatePlayer2Board } from "./renderBoard";
+import { updateHeader } from "./renderDOM";
 
 // These playerBoards are side effects (external state) / (dependencies).
 let player1Board; 
@@ -184,16 +185,17 @@ function computerAttacks (player) {
 
     const result = player.board.receiveAttack(x,y)
 
-    console.log("Coords: "+x,y)
-    console.log(result)
+    // console.log("Coords: "+x,y)
+    // console.log(result)
     if (result === "Already Hit" || result == "Already Miss") {
          return computerAttacks(player)
     }
 
    
 
-    console.log("Computer has successfully attacked.");
+    // console.log("Computer has successfully attacked.");
 
+    updateHeader(`Computer chose x: ${x} and y: ${y} and it's a ${result.toLowerCase()}`);
     turnState.updateTurn();
 
    
