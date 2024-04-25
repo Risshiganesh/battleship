@@ -256,6 +256,11 @@ function displayHitMap(player,playerDOMGrid) {
 }
 
 
+function updateHeader (params) {
+    
+}
+
+
 
 
 
@@ -263,6 +268,14 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
     grid.addEventListener('click', function () {
 
         const currentPlayerTurn = turnState.getTurn();
+
+        const gameIsOver = turnState.isGameOver();
+
+        if (gameIsOver) {
+
+            console.log("Game is over")
+            return
+        }
 
         console.log(currentPlayerTurn)
         if (isPlayer === currentPlayerTurn) {

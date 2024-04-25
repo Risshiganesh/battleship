@@ -98,16 +98,6 @@ function gameFlow () {
 
 
 
-// player1Board.displayGrids()
-
-    // player1Board.showShips()
-
-    
-
-
-    // player2Board.displayGrids()
-
-    // player2Board.showHitMap()
 
 const turnState = (function () {
     let playerTurn = "player1";
@@ -160,16 +150,31 @@ const turnState = (function () {
         return playerTurn;
     }
 
+    function isGameOver () {
+        
+        const player1Loses = player1Board.player1.board.allSunk();
+        console.log(player1Loses);
+
+        const player2Loses = player2Board.player2.board.allSunk();
+        console.log(player2Loses);
+
+        if (player1Loses || player2Loses) {
+            return true;
+        }
+
+    }
+
     return{
         updateTurn,
-        getTurn
+        getTurn,
+        isGameOver
     }
 })()
 
 
 let test = 0
 
-function computerAttacks (player){
+function computerAttacks (player) {
 
     console.log("Computer attacks");
 
