@@ -34,6 +34,18 @@ function gameFlow () {
     const player2Submarine = createShip(3);
     const player2PatrolBoat = createShip(2)
 
+
+
+    // 
+    // 
+    // 
+    // 
+    // 
+    // Remove all of the below and create a function that randomly places ships. It is much more reusable (because you can still use it later with a randomize button when you add drag and drop feature) and easier to implement, just use Math.random and if "Placement_failed", run the placeShip function with the same ship again.
+
+    // Also use Math.random function to choose positions 0 to 3 because 4 options. Put the options in an array.
+
+    // Change the coordinates display to the default Battleship style. Letter and Number e.g: A1,B9,E7,etc. 
     player1.board.placeShip({x:9,y:9}, "north", player1Carrier);
     player1.board.placeShip({x:0,y:0}, "east", player1Battleship);
     player1.board.placeShip({x:5,y:5}, "east", player1Destroyer);
@@ -41,7 +53,7 @@ function gameFlow () {
     player1.board.placeShip({x:9,y:0}, "south", player1PatrolBoat);
 
     for (let index = 0; index < 10; index++) {
-        // const element = array[index];
+
         
         player1.board.receiveAttack(9,index)
         player1.board.receiveAttack(index,index)
@@ -56,9 +68,7 @@ function gameFlow () {
 
 
     for (let index = 0; index < 10; index++) {
-        // const element = array[index];
-        
-        // player2.board.receiveAttack(9,index)
+
         player2.board.receiveAttack(index,index)
     }
 
@@ -68,11 +78,6 @@ function gameFlow () {
 
    
 
-    // console.log(player1.board.allSunk())
-
-    // while (!(player1.board.allSunk()) || !(player2.board.allSunk())) {
-    //     player1Board.showShips()
-    // }
 
     player1Board.displayGrids()
 
@@ -85,17 +90,13 @@ function gameFlow () {
 
     player2Board.showHitMap()
 
-    // console.log("game over")
-
-    // const turnState = currentTurn()
+ 
 
 
 
 }
 
-// merge turnstate into gameflow or gameflow into turnstate? Because cannot show ships (player1Board must be accessed).
 
-// in turnState create a function to check if gameover and who won using allSunk() from each boards. Is checked everytime a grid is clicked.
 
 
 
