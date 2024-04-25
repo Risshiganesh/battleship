@@ -41,7 +41,7 @@ import { currentTurn, turnState } from "./gameFlow";
 
 
 // refactor if necessary
-function populatePlayer1Board (player1, playerTurn){
+function populatePlayer1Board (player1, player1Type){
     const player1Grid = document.querySelector('.player1-grid');
 
 
@@ -77,13 +77,14 @@ function populatePlayer1Board (player1, playerTurn){
         displayGrids,
         deleteGrids,
         showShips,
-        showHitMap
+        showHitMap,
+        player1
     }
 
 }
 
 // Merge it into one function - above
-function populatePlayer2Board (player2, player2type, playerTurn) {
+function populatePlayer2Board (player2, player2Type) {
 
     const player2Grid = document.querySelector('.player2-grid');
 
@@ -110,7 +111,8 @@ function populatePlayer2Board (player2, player2type, playerTurn) {
         displayGrids,
         deleteGrids,
         showShips,
-        showHitMap
+        showHitMap,
+        player2
     }
     
     
@@ -262,8 +264,6 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
         const currentPlayerTurn = turnState.getTurn();
 
-        // console.log(currentPlayerTurn)
-
         console.log(currentPlayerTurn)
         if (isPlayer === currentPlayerTurn) {
             // turnState.updateTurn()
@@ -271,7 +271,6 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
             return
         }
 
-        // turn this to a function? or is there another way?
 
         const x = columnIndex
         const y = rowIndex;
@@ -288,7 +287,7 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         player.board.receiveAttack(x,y)
         turnState.updateTurn()
         if (player.board.ownGrid[x][y]) {
-            // remove this if not necessary
+  
             grid.classList.add('ship-is-hit')
             console.log(player.board.ownGrid[x][y].getHits())
             // check if allSunk()
@@ -296,18 +295,7 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         }
 
         grid.classList.add('attack-missed');
-        // re-render hitMap and remove all displayShips
 
-
-
-
-
-        // let playerTurn = true
-
-        // if (playerTurn) {
-           
-            
-        // }
         
     })
 }

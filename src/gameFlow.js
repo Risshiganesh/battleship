@@ -62,8 +62,8 @@ function gameFlow () {
     }
 
 
-    player1Board = populatePlayer1Board(player1);
-    player2Board = populatePlayer2Board(player2);
+    player1Board = populatePlayer1Board(player1, player1.type);
+    player2Board = populatePlayer2Board(player2, player2.type);
 
    
 
@@ -127,6 +127,11 @@ const turnState = (function () {
             player2Board.showShips();
             player2Board.showHitMap();
 
+            // build AI here?
+            if (player2Board.player2.type === 'computer') {
+                computerAttacks(player1Board.player1)
+            }
+
 
             return
         }
@@ -143,6 +148,10 @@ const turnState = (function () {
             player1Board.showShips();
             player1Board.showHitMap();
 
+            if (player1Board.player1.type === 'computer') {
+                computerAttacks(player2Board.player2)
+            }
+
             return
         }
     }
@@ -156,6 +165,37 @@ const turnState = (function () {
         getTurn
     }
 })()
+
+
+let test = 0
+
+function computerAttacks (player){
+
+    console.log("Computer attacks");
+
+    const x = Math.floor(Math.random() * 10);
+
+    const y = Math.floor(Math.random() * 10);
+
+    const result = player.board.receiveAttack(x,y)
+
+    console.log("Coords: "+x,y)
+    console.log(result)
+    if (result === "Already Hit" || result == "Already Miss") {
+         return computerAttacks(player)
+    }
+
+   
+
+    console.log("Computer has successfully attacked.");
+
+    turnState.updateTurn();
+
+   
+    test++
+    console.log('Computer attacks:' + test)
+    return 
+}
 
 
 export {
