@@ -55,7 +55,7 @@ body{
 .player1-div {
     width: 100%;
     height: 100%;
-    border: 2px lightgreen;
+    border: 2px solid lightgreen;
     display: grid;
     justify-items: center;
     align-items: center;
@@ -84,6 +84,9 @@ body{
     border: var(--border-size);
     width: var(--height-and-width);
     height: var(--height-and-width);
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    color: white;
 
 }
 
@@ -98,6 +101,38 @@ body{
 }
 
 
+.grid-column{
+    display: grid;
+    grid-template-rows: repeat(10, 1fr);
+    /* border: 2px solid turquoise; */
+}
+
+.grid-row{
+
+    border: 2px solid turquoise;
+    
+}
+.grid-row:hover{
+    /* background-color: rgba(255, 255, 0, 0.156); */
+    border: 3px solid yellow;
+}
+
+.clicked {
+    background-color: red;
+}
+
+.ship-located {
+    background-color: darkorchid;
+}
+
+
+.ship-is-hit{
+    background-color: darkred;
+}
+
+.attack-missed{
+    background-color: white;
+}
 @media (max-width: 770px){
     /* change player font position */
 

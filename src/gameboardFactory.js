@@ -103,7 +103,8 @@ function createGameboard(){
         ownGrid,
         placeShip,
         receiveAttack,
-        allSunk
+        allSunk,
+        hitMap
     }
 
 

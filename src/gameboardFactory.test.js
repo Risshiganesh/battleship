@@ -768,3 +768,8 @@ describe("Check if all ships sunk", function () {
     
     
 })
+
+
+
+
+// Write tests for gameboard hitmap

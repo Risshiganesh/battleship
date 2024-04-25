@@ -1,5 +1,6 @@
 import './assets/style.css';
 
+import { createPlayer } from "./playerFactory";
 // import { module } from './module';
 
 
@@ -10,4 +11,14 @@ import './assets/style.css';
 
 import { createDOM } from "./renderDOM";
 
+import { gameFlow } from './gameFlow';
+
+// import { populateBoard } from './renderBoard';
+
 createDOM();
+gameFlow();
+
+
+// remove this later
+// const testPlayer = createPlayer("real");
+// populateBoard(testPlayer)
