@@ -275,7 +275,7 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
             // console.log("Game is over")
 
-            updateHeader("Game is over");
+            // updateHeader("Game is over");
             return
         }
 

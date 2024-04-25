@@ -9,6 +9,7 @@ function createDOM () {
 
         const headerDiv = document.createElement('div');
         headerDiv.classList.add('header-div');
+        headerDiv.textContent = 'Player 1 goes first'
         mainContainer.append(headerDiv);
 
         const playerDiv = document.createElement('div');

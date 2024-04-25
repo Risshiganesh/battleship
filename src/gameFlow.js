@@ -159,7 +159,13 @@ const turnState = (function () {
         const player2Loses = player2Board.player2.board.allSunk();
         console.log(player2Loses);
 
-        if (player1Loses || player2Loses) {
+        if (player1Loses) {
+            updateHeader("Player 2 wins!")
+            return true;
+        }
+
+        if (player2Loses) {
+            updateHeader("Player 1 wins!")
             return true;
         }
 
