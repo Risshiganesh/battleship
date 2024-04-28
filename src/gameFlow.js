@@ -55,13 +55,24 @@ function gameFlow () {
 
     // Also use Math.random function to choose positions 0 to 3 because 4 options. Put the options in an array. (Done)
 
-    // Change the coordinates display to the default Battleship style. Letter and Number e.g: A1,B9,E7,etc. 
+    // Change the coordinates display to the default Battleship style. Letter and Number e.g: A1,B9,E7,etc. (Done)
 
-    // Create pass device screen for 2 player option.
+
+    // Create a start menu that allows the player to choose whether to play against Computer or a real player.
+
+    // Create pass device screen for 2 player option. Verify if this is done. Seems to work, check what happens to pass menu if gameover.
 
     // Include a game restart button that clears all state and recreates the entire board with new random ship placements. (Create a function in turnstate that resets player turn to player one and call it when the restart button is clicked).
 
     // create tests for hitMap one for hit and one for miss. (Haven't created this yet - ensures you can refactor safely later on).
+
+    // Check all DOM modules as to whether or not you need to write tests for any of the functions. (Anything that runs because of DOM event should not be tested, only pure logic should be tested)
+
+
+    // Label the grids with letters and numbers? Use grids.
+
+
+    
     // console.log(player1.board.placeShip({x:9,y:9}, "north", player1Carrier));
     // player1.board.placeShip({x:0,y:0}, "east", player1Battleship);
     // player1.board.placeShip({x:5,y:5}, "east", player1Destroyer);
@@ -243,6 +254,9 @@ const turnState = (function () {
     }
 
     function isGameOver () {
+        const passDeviceMsg = document.querySelector('.pass-device-message');
+
+        const passDeviceButton = document.querySelector('.pass-device-button');
         
         const player1Loses = player1Board.player1.board.allSunk();
         console.log(player1Loses);
@@ -251,12 +265,18 @@ const turnState = (function () {
         console.log(player2Loses);
 
         if (player1Loses) {
-            updateHeader("Player 2 wins!")
+            
+            passDeviceMsg.textContent = "Player 2 wins!";
+            passDeviceButton.textContent = 'See board';
+            updateHeader("Player 2 wins!");
             return true;
         }
 
         if (player2Loses) {
-            updateHeader("Player 1 wins!")
+            
+            passDeviceMsg.textContent = "Player 1 wins!";
+            passDeviceButton.textContent = 'See board';
+            updateHeader("Player 1 wins!");
             return true;
         }
 

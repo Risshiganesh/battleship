@@ -267,6 +267,10 @@ function displayHitMap(player,playerDOMGrid) {
 function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
     grid.addEventListener('click', function () {
 
+        const passDeviceDiv = document.querySelector('.pass-device');
+
+        const passDeviceMsg = document.querySelector('.pass-device-message');
+
         const currentPlayerTurn = turnState.getTurn();
 
         const gameIsOver = turnState.isGameOver();
@@ -301,6 +305,23 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         }
 
 
+        // 
+        if (player.type === "real") {
+            passDeviceDiv.classList.add('show-pass-device');
+
+            if (currentPlayerTurn === "player1") {
+                passDeviceMsg.textContent = "Pass the device to Player 2";
+            }
+           
+            if (currentPlayerTurn === "player2") {
+                passDeviceMsg.textContent = "Pass the device to Player 1";
+            }
+
+            
+        }
+
+        
+
         const result = player.board.receiveAttack(x,y);
 
         const letterArrayX = ["A","B","C","D","E","F","G","H","I","J"];
@@ -309,7 +330,9 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         if (currentPlayerTurn === "player1") {
 
 
+            
             updateHeader(`Player 1 chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toLowerCase()}`);
+
         }
 
         if (currentPlayerTurn === "player2") {
@@ -326,8 +349,7 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
   
             grid.classList.add('ship-is-hit')
             console.log(player.board.ownGrid[x][y].getHits())
-            // check if allSunk()
-            // turnState.isGameOver();
+     
             return
         }
 

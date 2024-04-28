@@ -3,6 +3,29 @@ function createDOM () {
 
     const body = document.querySelector('body');
 
+    const passDeviceDiv = document.createElement('div');
+    passDeviceDiv.classList.add('pass-device');
+    body.append(passDeviceDiv);
+
+
+        const passDeviceMsg = document.createElement('div');
+        passDeviceMsg.classList.add('pass-device-message');
+        passDeviceDiv.append(passDeviceMsg);
+
+
+        const passDeviceButton = document.createElement('button');
+        passDeviceButton.classList.add('pass-device-button');
+        passDeviceButton.textContent = "Start turn";
+        passDeviceDiv.append(passDeviceButton);
+
+        passDeviceButton.addEventListener('click', function(e){
+            e.preventDefault();
+            passDeviceDiv.classList.remove('show-pass-device');
+
+            // console.log("Test")
+        })
+
+
     const mainContainer = document.createElement('div');
     mainContainer.classList.add('main-container');
     body.append(mainContainer);
