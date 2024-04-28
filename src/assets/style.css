@@ -86,7 +86,7 @@ body{
 .player1-grid,
 .player2-grid{
 
-    --height-and-width: max(350px, 30vw);
+    --height-and-width: max(330px, 30vw);
     --border-size: 2px solid greenyellow;
 
     border: var(--border-size);
@@ -113,6 +113,7 @@ body{
     display: grid;
     grid-template-rows: repeat(10, 1fr);
     /* border: 2px solid turquoise; */
+    text-align: center;
 }
 
 .grid-row{
@@ -146,9 +147,10 @@ body{
 
     .player1-grid,
     .player2-grid{
-        /* border: 2px solid greenyellow; */
-        width: 350px;
-        height: 350px;
+        
+        /* Might have to reduce size further */
+        width: 330px;
+        height: 330px;
 
     }
     .player1-div{

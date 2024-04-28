@@ -43,7 +43,7 @@ import { updateHeader } from "./renderDOM";
 
 
 // refactor if necessary
-function populatePlayer1Board (player1, player1Type){
+function populatePlayer1Board (player1){
     const player1Grid = document.querySelector('.player1-grid');
 
 
@@ -86,7 +86,7 @@ function populatePlayer1Board (player1, player1Type){
 }
 
 // Merge it into one function - above
-function populatePlayer2Board (player2, player2Type) {
+function populatePlayer2Board (player2) {
 
     const player2Grid = document.querySelector('.player2-grid');
 
@@ -273,18 +273,14 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
         if (gameIsOver) {
 
-            // console.log("Game is over")
 
-            // updateHeader("Game is over");
-            return
         }
 
-        // console.log(currentPlayerTurn)
 
-        updateHeader(`It is ${currentPlayerTurn}'s turn.`)
+
+        
         if (isPlayer === currentPlayerTurn) {
-            // turnState.updateTurn()
-            // console.log("Not your own board!")
+
 
             updateHeader("Not your own board!");
             return
@@ -307,7 +303,22 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
         const result = player.board.receiveAttack(x,y);
 
-        updateHeader(`${currentPlayerTurn} chose x: ${x} and y: ${y} and it's a ${result.toLowerCase()}`);
+        const letterArrayX = ["A","B","C","D","E","F","G","H","I","J"];
+
+        const numberArrayY = [10,9,8,7,6,5,4,3,2,1]
+        if (currentPlayerTurn === "player1") {
+
+
+            updateHeader(`Player 1 chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toLowerCase()}`);
+        }
+
+        if (currentPlayerTurn === "player2") {
+
+
+            updateHeader(`Player 2 chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toLowerCase()}`);
+
+        }
+        
 
         turnState.updateTurn();
 
@@ -316,6 +327,7 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
             grid.classList.add('ship-is-hit')
             console.log(player.board.ownGrid[x][y].getHits())
             // check if allSunk()
+            // turnState.isGameOver();
             return
         }
 

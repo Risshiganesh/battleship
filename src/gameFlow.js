@@ -11,7 +11,8 @@ let player2Board;
 function gameFlow () {
 
     const player1 = createPlayer("real");
-    const player2 = createPlayer("computer"); 
+    // const player2 = createPlayer("computer");
+    const player2 = createPlayer("real");  
 
     // place player1 ships
     // Types of ship
@@ -32,52 +33,134 @@ function gameFlow () {
     const player2Battleship = createShip(4);
     const player2Destroyer = createShip(3);
     const player2Submarine = createShip(3);
-    const player2PatrolBoat = createShip(2)
+    const player2PatrolBoat = createShip(2);
 
 
 
-    // 
-    // 
-    // 
-    // 
-    // 
-    // Remove all of the below and create a function that randomly places ships. It is much more reusable (because you can still use it later with a randomize button when you add drag and drop feature) and easier to implement, just use Math.random and if "Placement_failed", run the placeShip function with the same ship again.
+    // const carrier = createShip(5);
+    // const battleship = createShip(4);
+    // const destroyer = createShip(3);
+    // const submarine = createShip(3);
+    // const patrolBoat = createShip(2)
 
-    // Also use Math.random function to choose positions 0 to 3 because 4 options. Put the options in an array.
+    const allPlayer1Ships = [player1Carrier, player1Battleship, player1Destroyer, player1Submarine, player1PatrolBoat];
+
+    const allPlayer2Ships = [player2Carrier, player2Battleship, player2Destroyer, player2Submarine, player2PatrolBoat]
+    // 
+    // 
+    // 
+    // 
+    // 
+    // Remove all of the below and create a function that randomly places ships. It is much more reusable (because you can still use it later with a randomize button when you add drag and drop feature) and easier to implement, just use Math.random and if "Placement_failed", run the placeShip function with the same ship again. (Done)
+
+    // Also use Math.random function to choose positions 0 to 3 because 4 options. Put the options in an array. (Done)
 
     // Change the coordinates display to the default Battleship style. Letter and Number e.g: A1,B9,E7,etc. 
-    player1.board.placeShip({x:9,y:9}, "north", player1Carrier);
-    player1.board.placeShip({x:0,y:0}, "east", player1Battleship);
-    player1.board.placeShip({x:5,y:5}, "east", player1Destroyer);
-    player1.board.placeShip({x:2,y:2}, "east", player1Submarine);
-    player1.board.placeShip({x:9,y:0}, "south", player1PatrolBoat);
 
-    for (let index = 0; index < 10; index++) {
+    // Create pass device screen for 2 player option.
+
+    // Include a game restart button that clears all state and recreates the entire board with new random ship placements. (Create a function in turnstate that resets player turn to player one and call it when the restart button is clicked).
+
+    // create tests for hitMap one for hit and one for miss. (Haven't created this yet - ensures you can refactor safely later on).
+    // console.log(player1.board.placeShip({x:9,y:9}, "north", player1Carrier));
+    // player1.board.placeShip({x:0,y:0}, "east", player1Battleship);
+    // player1.board.placeShip({x:5,y:5}, "east", player1Destroyer);
+    // player1.board.placeShip({x:2,y:2}, "east", player1Submarine);
+    // player1.board.placeShip({x:9,y:0}, "south", player1PatrolBoat);
+
+
+
+    // console.log(player2.board.placeShip({x:9,y:9}, "north", player2Carrier));
+    // player2.board.placeShip({x:0,y:0}, "east", player2Battleship);
+    // player2.board.placeShip({x:5,y:5}, "east", player2Destroyer);
+    // player2.board.placeShip({x:2,y:2}, "east", player2Submarine);
+    // player2.board.placeShip({x:9,y:0}, "south", player2PatrolBoat);
+
+    function placeAllShips (player, shipsArray){
 
         
-        player1.board.receiveAttack(9,index)
-        player1.board.receiveAttack(index,index)
+        shipsArray.forEach(ship => {
+            const result = player.board.placeShip(createRandomCoords(), chooseDirection(), ship)
+
+            if (result === "Placement_failed") {
+
+
+
+
+                return placeAllShips(player, [ship])
+            }
+
+            if (result === "Placement_success") {
+
+                console.log("All ships successfully placed");
+                return;
+            }
+        });
+
+        
     }
 
 
-    player2.board.placeShip({x:8,y:8}, "west", player2Carrier);
-    player2.board.placeShip({x:0,y:0}, "east", player2Battleship);
-    player2.board.placeShip({x:5,y:5}, "east", player2Destroyer);
-    player2.board.placeShip({x:2,y:2}, "east", player2Submarine);
-    player2.board.placeShip({x:9,y:5}, "south", player2PatrolBoat);
+    function createRandomCoords () {
+            
+        const x = Math.floor(Math.random()*10);
+        const y = Math.floor(Math.random()*10);
 
-
-    for (let index = 0; index < 10; index++) {
-
-        player2.board.receiveAttack(index,index)
+        return{
+            x,
+            y
+        }
     }
 
 
-    player1Board = populatePlayer1Board(player1, player1.type);
-    player2Board = populatePlayer2Board(player2, player2.type);
+    function chooseDirection () {
+
+        const directionArray = ["north", "south", "east", "west"];
+
+        // from 0 to 3
+        const chooseRandomDirection = Math.floor(Math.random()*4);
+
+        if (chooseRandomDirection > 3 || chooseRandomDirection < 0) {
+            throw("Choose Random Direction is not working correctly")
+        }
+
+        return directionArray[chooseRandomDirection]
+
+    }
+
+
+    placeAllShips(player1, allPlayer1Ships);
+    placeAllShips(player2, allPlayer2Ships)
+
+    // for (let index = 0; index < 10; index++) {
+
+        
+    //     player1.board.receiveAttack(9,index)
+    //     player1.board.receiveAttack(index,index)
+    // }
+
+
+    // player2.board.placeShip({x:9,y:9}, "west", player2Carrier);
+    // player2.board.placeShip({x:0,y:0}, "east", player2Battleship);
+    // player2.board.placeShip({x:5,y:5}, "east", player2Destroyer);
+    // player2.board.placeShip({x:2,y:2}, "east", player2Submarine);
+    // player2.board.placeShip({x:9,y:5}, "south", player2PatrolBoat);
+
+
+    // for (let index = 0; index < 10; index++) {
+
+    //     player2.board.receiveAttack(index,index)
+    // }
+
+
+    // I probably can remove player.type and it might still work correctly.
+    player1Board = populatePlayer1Board(player1);
+    player2Board = populatePlayer2Board(player2);
 
    
 
+
+    // The ones below stay as it is.
 
     player1Board.displayGrids()
 
@@ -107,6 +190,13 @@ const turnState = (function () {
     
 
     function updateTurn() {
+
+        // Prevents computer from playing
+        if (isGameOver()) {
+            return;
+        }
+
+
         if (playerTurn === "player1") {
             playerTurn = "player2"
 
@@ -119,7 +209,7 @@ const turnState = (function () {
             player2Board.showShips();
             player2Board.showHitMap();
 
-            // build AI here?
+
             if (player2Board.player2.type === 'computer') {
                 computerAttacks(player1Board.player1)
             }
@@ -202,7 +292,11 @@ function computerAttacks (player) {
 
     // console.log("Computer has successfully attacked.");
 
-    updateHeader(`Computer chose x: ${x} and y: ${y} and it's a ${result.toLowerCase()}`);
+    const letterArrayX = ["A","B","C","D","E","F","G","H","I","J"];
+
+        const numberArrayY = [10,9,8,7,6,5,4,3,2,1];
+
+    updateHeader(`Computer chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toLowerCase()}`);
     turnState.updateTurn();
 
    
