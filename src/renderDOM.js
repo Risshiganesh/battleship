@@ -78,10 +78,19 @@ function createDOM () {
     mainContainer.classList.add('main-container');
     body.append(mainContainer);
 
-        const headerDiv = document.createElement('div');
-        headerDiv.classList.add('header-div');
-        headerDiv.textContent = 'Player 1 goes first'
-        mainContainer.append(headerDiv);
+        const topDiv = document.createElement('div');
+        topDiv.classList.add('top-div');
+        mainContainer.append(topDiv)
+
+            const headerDiv = document.createElement('div');
+            headerDiv.classList.add('header-div');
+            headerDiv.textContent = 'Player 1 goes first'
+            topDiv.append(headerDiv);
+
+            const restartButton = document.createElement('button');
+            restartButton.classList.add('restart-button');
+            restartButton.textContent = "RESTART";
+            topDiv.append(restartButton);
 
         const playerDiv = document.createElement('div');
         playerDiv.classList.add('player-div');

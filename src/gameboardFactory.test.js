@@ -1,21 +1,21 @@
 import {createGameboard, getCoordinates, checkPlacementValidity} from './gameboardFactory';
 import { createShip } from './shipFactory';
 
-describe('Test gameboard factory',function () {
+describe('Test gameboard ownGrid',function () {
     const gameboard = createGameboard()
     
 
-    test('Gameboard is an array', function () {
+    test('ownGrid is an array', function () {
         expect(Array.isArray(gameboard.ownGrid)).toBe(true)
     });
 
-    test('Gameboard column size: 10',function () {
+    test('ownGrid column size: 10',function () {
         
         expect(gameboard.ownGrid.length).toBe(10);
         
     });
 
-    test("Gameboard row size: 10", function () {
+    test("ownGrid row size: 10", function () {
         
         let tenRows = true
         const columns = gameboard.ownGrid;
@@ -41,6 +41,44 @@ describe('Test gameboard factory',function () {
 
 
     
+
+})
+
+describe('Test gameboard hitMap',function () {
+    const gameboard = createGameboard()
+    
+
+    test('hitMap is an array', function () {
+        expect(Array.isArray(gameboard.hitMap)).toBe(true)
+    });
+
+    test('hitMap column size: 10',function () {
+        
+        expect(gameboard.hitMap.length).toBe(10);
+        
+    });
+
+    test("hitMap row size: 10", function () {
+        
+        let tenRows = true
+        const columns = gameboard.hitMap;
+
+
+        for (let index = 0; index < columns.length; index++) {
+            const column = columns[index];
+
+            if (column.length !== 10) {
+                tenRows = false;
+                break;
+            }
+
+        }
+
+        expect(tenRows).toBe(true);
+
+    })
+
+      
 
 })
 
@@ -770,8 +808,3 @@ describe("Check if all ships sunk", function () {
 })
 
 
-
-
-// Write tests for gameboard hitmap
-
-// describe()

@@ -42,12 +42,17 @@ import { updateHeader } from "./renderDOM";
 
 
 
+
+
 function gameStart () {
     const startMenu = document.querySelector('.start-menu');
     const playerTypeTitle = document.querySelector('.player-type-title');
     const startButton = document.querySelector('.start-button');
     const computerOption = document.querySelector('.computer-option');
     const realPlayerOption = document.querySelector('.real-player-option');
+
+
+    const restartButton = document.querySelector('.restart-button');
     
     
     startButton.addEventListener('click', function(e){
@@ -75,6 +80,18 @@ function gameStart () {
 
         setPlayer2Type("real");
     })
+
+
+    restartButton.addEventListener('click', function (e) {
+        e.preventDefault()
+
+        turnState.resetTurn();
+
+        const gameOver = document.querySelector('.game-over');
+        gameOver.classList.remove('enable-game-over');
+        gameFlow()
+    })
+
 
 
 }
@@ -311,12 +328,12 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
         const currentPlayerTurn = turnState.getTurn();
 
-        const gameIsOver = turnState.isGameOver();
+        // const gameIsOver = turnState.isGameOver();
 
-        if (gameIsOver) {
+        // if (gameIsOver) {
 
 
-        }
+        // }
 
 
 

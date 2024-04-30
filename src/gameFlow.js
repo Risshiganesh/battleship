@@ -14,6 +14,18 @@ function setPlayer2Type (type){
 }
 function gameFlow () {
 
+    if (player1Board) {
+        player1Board.deleteGrids()
+        player1Board = null;
+    }
+
+    if (player2Board) {
+        player2Board.deleteGrids()
+        player2Board = null;
+    }
+
+
+
     const player1 = createPlayer("real");
     const player2 = createPlayer(player2Type);
     // const player2 = createPlayer("real");  
@@ -66,9 +78,9 @@ function gameFlow () {
 
     // Create pass device screen for 2 player option. Verify if this is done. Seems to work, check what happens to pass menu if gameover. (Done)
 
-    // Include a game restart button that clears all state and recreates the entire board with new random ship placements. (Create a function in turnstate that resets player turn to player one and call it when the restart button is clicked).
+    // Include a game restart button that clears all state and recreates the entire board with new random ship placements. (Create a function in turnstate that resets player turn to player one and call it when the restart button is clicked). (Done)
 
-    // create tests for hitMap one for hit and one for miss. (Haven't created this yet - ensures you can refactor safely later on).
+    // create tests for hitMap one for hit and one for miss. (Haven't created this yet - ensures you can refactor safely later on). (Done)
 
     // Check all DOM modules as to whether or not you need to write tests for any of the functions. (Anything that runs because of DOM event should not be tested, only pure logic should be tested)
 
@@ -77,19 +89,19 @@ function gameFlow () {
 
 
     
-    console.log(player1.board.placeShip({x:9,y:9}, "north", player1Carrier));
-    player1.board.placeShip({x:0,y:0}, "east", player1Battleship);
-    player1.board.placeShip({x:5,y:5}, "east", player1Destroyer);
-    player1.board.placeShip({x:2,y:2}, "east", player1Submarine);
-    player1.board.placeShip({x:9,y:0}, "south", player1PatrolBoat);
+    // console.log(player1.board.placeShip({x:9,y:9}, "north", player1Carrier));
+    // player1.board.placeShip({x:0,y:0}, "east", player1Battleship);
+    // player1.board.placeShip({x:5,y:5}, "east", player1Destroyer);
+    // player1.board.placeShip({x:2,y:2}, "east", player1Submarine);
+    // player1.board.placeShip({x:9,y:0}, "south", player1PatrolBoat);
 
 
 
-    console.log(player2.board.placeShip({x:9,y:9}, "north", player2Carrier));
-    player2.board.placeShip({x:0,y:0}, "east", player2Battleship);
-    player2.board.placeShip({x:5,y:5}, "east", player2Destroyer);
-    player2.board.placeShip({x:2,y:2}, "east", player2Submarine);
-    player2.board.placeShip({x:9,y:0}, "south", player2PatrolBoat);
+    // console.log(player2.board.placeShip({x:9,y:9}, "north", player2Carrier));
+    // player2.board.placeShip({x:0,y:0}, "east", player2Battleship);
+    // player2.board.placeShip({x:5,y:5}, "east", player2Destroyer);
+    // player2.board.placeShip({x:2,y:2}, "east", player2Submarine);
+    // player2.board.placeShip({x:9,y:0}, "south", player2PatrolBoat);
 
     function placeAllShips (player, shipsArray){
 
@@ -144,8 +156,8 @@ function gameFlow () {
     }
 
 
-    // placeAllShips(player1, allPlayer1Ships);
-    // placeAllShips(player2, allPlayer2Ships)
+    placeAllShips(player1, allPlayer1Ships);
+    placeAllShips(player2, allPlayer2Ships);
 
 
 
@@ -308,10 +320,15 @@ const turnState = (function () {
 
     }
 
+    function resetTurn (){
+        playerTurn = "player1"
+    }
+
     return{
         updateTurn,
         getTurn,
-        isGameOver
+        isGameOver,
+        resetTurn
     }
 })()
 
