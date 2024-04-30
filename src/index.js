@@ -11,12 +11,15 @@ import { createPlayer } from "./playerFactory";
 
 import { createDOM } from "./renderDOM";
 
+import { gameStart } from './DOMAction';
+
 import { gameFlow } from './gameFlow';
 
 // import { populateBoard } from './renderBoard';
 
 createDOM();
-gameFlow();
+gameStart();
+// gameFlow();
 
 
 // remove this later

@@ -1,4 +1,4 @@
-import { currentTurn, turnState } from "./gameFlow";
+import { gameFlow, turnState, setPlayer2Type } from "./gameFlow";
 
 import { updateHeader } from "./renderDOM";
 
@@ -40,6 +40,44 @@ import { updateHeader } from "./renderDOM";
 
 // add coordinates as an object "const coords = {x:0,y:0}" inside addeventlistener callback function? use columnIndex annd rowIndex? (DONE)
 
+
+
+function gameStart () {
+    const startMenu = document.querySelector('.start-menu');
+    const playerTypeTitle = document.querySelector('.player-type-title');
+    const startButton = document.querySelector('.start-button');
+    const computerOption = document.querySelector('.computer-option');
+    const realPlayerOption = document.querySelector('.real-player-option');
+    
+    
+    startButton.addEventListener('click', function(e){
+
+        e.preventDefault();
+
+        startMenu.classList.remove('show-start-menu');
+
+        gameFlow();
+
+    });
+
+    computerOption.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        playerTypeTitle.textContent = "Play against: Computer"
+
+        setPlayer2Type("computer");
+    })
+
+    realPlayerOption.addEventListener("click", function (e) {
+        e.preventDefault();
+
+        playerTypeTitle.textContent = "Play against: Your Friend"
+
+        setPlayer2Type("real");
+    })
+
+
+}
 
 
 // refactor if necessary
@@ -371,5 +409,6 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
 export{
     populatePlayer1Board,
-    populatePlayer2Board
+    populatePlayer2Board,
+    gameStart
 }

@@ -1,18 +1,22 @@
 import { createPlayer } from "./playerFactory";
 import { createShip } from "./shipFactory";
-import { populatePlayer1Board, populatePlayer2Board } from "./renderBoard";
+import { populatePlayer1Board, populatePlayer2Board } from "./DOMAction";
 import { updateHeader } from "./renderDOM";
 
 // These playerBoards are side effects (external state) / (dependencies).
 let player1Board; 
 let player2Board;
 
+let player2Type = "computer"
 
+function setPlayer2Type (type){
+    player2Type = type
+}
 function gameFlow () {
 
     const player1 = createPlayer("real");
-    // const player2 = createPlayer("computer");
-    const player2 = createPlayer("real");  
+    const player2 = createPlayer(player2Type);
+    // const player2 = createPlayer("real");  
 
     // place player1 ships
     // Types of ship
@@ -58,9 +62,9 @@ function gameFlow () {
     // Change the coordinates display to the default Battleship style. Letter and Number e.g: A1,B9,E7,etc. (Done)
 
 
-    // Create a start menu that allows the player to choose whether to play against Computer or a real player.
+    // Create a start menu that allows the player to choose whether to play against Computer or a real player. (Done)
 
-    // Create pass device screen for 2 player option. Verify if this is done. Seems to work, check what happens to pass menu if gameover.
+    // Create pass device screen for 2 player option. Verify if this is done. Seems to work, check what happens to pass menu if gameover. (Done)
 
     // Include a game restart button that clears all state and recreates the entire board with new random ship placements. (Create a function in turnstate that resets player turn to player one and call it when the restart button is clicked).
 
@@ -207,6 +211,25 @@ const turnState = (function () {
 
         // Prevents computer from playing
         if (isGameOver()) {
+
+            const passDevice = document.querySelector('.pass-device');
+            passDevice.classList.add('show-pass-device');
+
+            const gameOver = document.querySelector('.game-over');
+            gameOver.classList.add('enable-game-over');
+            // Make playerDiv not clickable
+
+            player1Board.deleteGrids();
+            player1Board.displayGrids();
+            player1Board.showShips();
+            player1Board.showHitMap();
+
+            player2Board.deleteGrids();
+            player2Board.displayGrids();
+            player2Board.showShips();
+            player2Board.showHitMap();
+
+
             return;
         }
 
@@ -331,5 +354,6 @@ function computerAttacks (player) {
 
 export {
     gameFlow,
-    turnState
+    turnState,
+    setPlayer2Type
 }

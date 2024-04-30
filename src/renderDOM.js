@@ -5,8 +5,51 @@ function createDOM () {
 
     const startMenu = document.createElement('div');
     startMenu.classList.add('start-menu');
+    startMenu.classList.add('show-start-menu');
     body.append(startMenu);
+
     
+        const playerTitleDiv = document.createElement('div');
+        playerTitleDiv.classList.add('player-title-div');
+        startMenu.append(playerTitleDiv);
+
+            const gameTitle = document.createElement('div');
+            gameTitle.textContent = "BATTLESHIP"
+            gameTitle.classList.add('game-title');
+            playerTitleDiv.append(gameTitle);
+
+
+            const playerTypeTitle = document.createElement('div');
+            playerTypeTitle.classList.add('player-type-title');
+            playerTypeTitle.textContent = 'Play against: Computer'
+            playerTitleDiv.append(playerTypeTitle);
+
+        const playerTypeDiv = document.createElement('div');
+        playerTypeDiv.classList.add('player-type-div');
+        startMenu.append(playerTypeDiv);
+
+
+            const computerOption = document.createElement('button');
+            computerOption.classList.add('computer-option');
+            computerOption.textContent = "Computer";
+            playerTypeDiv.append(computerOption);
+
+            const realPlayerOption = document.createElement('button');
+            realPlayerOption.classList.add('real-player-option');
+            realPlayerOption.textContent = "Your friend";
+            playerTypeDiv.append(realPlayerOption);
+
+            
+
+        const startButtonDiv = document.createElement('div');
+        startButtonDiv.classList.add('start-button-div');
+        startMenu.append(startButtonDiv);
+
+            const startButton = document.createElement("button");
+            startButton.textContent = "START!";
+            startButton.classList.add('start-button');
+            startButtonDiv.append(startButton);
+
 
     const passDeviceDiv = document.createElement('div');
     passDeviceDiv.classList.add('pass-device');
@@ -44,9 +87,19 @@ function createDOM () {
         playerDiv.classList.add('player-div');
         mainContainer.append(playerDiv);
 
+            const gameOver = document.createElement('div');
+            gameOver.classList.add('game-over');
+            playerDiv.append(gameOver);
+
         const footerDiv = document.createElement('div');
         footerDiv.classList.add('footer-div');
         mainContainer.append(footerDiv);
+
+            const footerLink = document.createElement('a');
+            footerLink.classList.add('footer-link');
+            footerLink.setAttribute("href", "https://github.com/Risshiganesh/battleship");
+            footerLink.textContent = "Made by Risshiganesh Villalan";
+            footerDiv.append(footerLink);
 
 
 
