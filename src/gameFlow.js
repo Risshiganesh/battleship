@@ -73,19 +73,19 @@ function gameFlow () {
 
 
     
-    // console.log(player1.board.placeShip({x:9,y:9}, "north", player1Carrier));
-    // player1.board.placeShip({x:0,y:0}, "east", player1Battleship);
-    // player1.board.placeShip({x:5,y:5}, "east", player1Destroyer);
-    // player1.board.placeShip({x:2,y:2}, "east", player1Submarine);
-    // player1.board.placeShip({x:9,y:0}, "south", player1PatrolBoat);
+    console.log(player1.board.placeShip({x:9,y:9}, "north", player1Carrier));
+    player1.board.placeShip({x:0,y:0}, "east", player1Battleship);
+    player1.board.placeShip({x:5,y:5}, "east", player1Destroyer);
+    player1.board.placeShip({x:2,y:2}, "east", player1Submarine);
+    player1.board.placeShip({x:9,y:0}, "south", player1PatrolBoat);
 
 
 
-    // console.log(player2.board.placeShip({x:9,y:9}, "north", player2Carrier));
-    // player2.board.placeShip({x:0,y:0}, "east", player2Battleship);
-    // player2.board.placeShip({x:5,y:5}, "east", player2Destroyer);
-    // player2.board.placeShip({x:2,y:2}, "east", player2Submarine);
-    // player2.board.placeShip({x:9,y:0}, "south", player2PatrolBoat);
+    console.log(player2.board.placeShip({x:9,y:9}, "north", player2Carrier));
+    player2.board.placeShip({x:0,y:0}, "east", player2Battleship);
+    player2.board.placeShip({x:5,y:5}, "east", player2Destroyer);
+    player2.board.placeShip({x:2,y:2}, "east", player2Submarine);
+    player2.board.placeShip({x:9,y:0}, "south", player2PatrolBoat);
 
     function placeAllShips (player, shipsArray){
 
@@ -140,8 +140,11 @@ function gameFlow () {
     }
 
 
-    placeAllShips(player1, allPlayer1Ships);
-    placeAllShips(player2, allPlayer2Ships)
+    // placeAllShips(player1, allPlayer1Ships);
+    // placeAllShips(player2, allPlayer2Ships)
+
+
+
 
     // for (let index = 0; index < 10; index++) {
 

@@ -305,20 +305,20 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         }
 
 
-        // 
-        if (player.type === "real") {
-            passDeviceDiv.classList.add('show-pass-device');
+        // Remove later is pass device message works correctly.
+        // if (player.type === "real") {
+        //     passDeviceDiv.classList.add('show-pass-device');
 
-            if (currentPlayerTurn === "player1") {
-                passDeviceMsg.textContent = "Pass the device to Player 2";
-            }
+        //     if (currentPlayerTurn === "player1") {
+        //         passDeviceMsg.textContent = "Pass the device to Player 2";
+        //     }
            
-            if (currentPlayerTurn === "player2") {
-                passDeviceMsg.textContent = "Pass the device to Player 1";
-            }
+        //     if (currentPlayerTurn === "player2") {
+        //         passDeviceMsg.textContent = "Pass the device to Player 1";
+        //     }
 
             
-        }
+        // }
 
         
 
@@ -329,18 +329,28 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         const numberArrayY = [10,9,8,7,6,5,4,3,2,1]
         if (currentPlayerTurn === "player1") {
 
+            // Create new div for pass the device msg?
+            passDeviceMsg.textContent = `It's a ${result.toUpperCase()}! \r\n Pass the device to Player 2`;
 
             
-            updateHeader(`Player 1 chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toLowerCase()}`);
+            updateHeader(`Player 1 chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toUpperCase()}`);
 
         }
 
         if (currentPlayerTurn === "player2") {
 
+            passDeviceMsg.textContent = `It's a ${result.toUpperCase()}! \r\n Pass the device to Player 1`;
 
-            updateHeader(`Player 2 chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toLowerCase()}`);
+
+            updateHeader(`Player 2 chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toUpperCase()}`);
 
         }
+
+        if (player.type === "real") {
+            passDeviceDiv.classList.add('show-pass-device');
+        }
+
+        
         
 
         turnState.updateTurn();

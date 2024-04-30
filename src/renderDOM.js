@@ -3,6 +3,11 @@ function createDOM () {
 
     const body = document.querySelector('body');
 
+    const startMenu = document.createElement('div');
+    startMenu.classList.add('start-menu');
+    body.append(startMenu);
+    
+
     const passDeviceDiv = document.createElement('div');
     passDeviceDiv.classList.add('pass-device');
     body.append(passDeviceDiv);
