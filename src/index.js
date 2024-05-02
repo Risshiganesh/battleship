@@ -15,13 +15,7 @@ import { gameStart } from './DOMAction';
 
 import { gameFlow } from './gameFlow';
 
-// import { populateBoard } from './renderBoard';
+
 
 createDOM();
 gameStart();
-// gameFlow();
-
-
-// remove this later
-// const testPlayer = createPlayer("real");
-// populateBoard(testPlayer)

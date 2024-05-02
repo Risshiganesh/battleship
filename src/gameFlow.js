@@ -7,13 +7,17 @@ import { updateHeader } from "./renderDOM";
 let player1Board; 
 let player2Board;
 
+// Player2Type is also an external state but does not get reset when restart is clicked
 let player2Type = "computer"
+
+// turnState is also an external state (Move it up).
 
 function setPlayer2Type (type){
     player2Type = type
 }
 function gameFlow () {
 
+    // move this out as a separate function and name it resetBoards. Call it from inside reset button.
     if (player1Board) {
         player1Board.deleteGrids()
         player1Board = null;

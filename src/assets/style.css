@@ -169,8 +169,9 @@ body{
 }
 
 .restart-button {
-    width: 90px;
-    height: 30px;
+    width: 130px;
+    height: 40px;
+    border-radius: 10px;
 }
 
 
@@ -182,7 +183,8 @@ body{
     border: 2px solid pink;
     /* background-color: yellow; */
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    /* grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); */
+    grid-template-columns: repeat(2,1fr);
     position: relative;;
 
 }
@@ -215,8 +217,12 @@ body{
 
 .player1-div,
 .player2-div{
-    padding: 20px;
+
     gap: 15px;
+    display: grid;
+    padding: 10px;
+    grid-template-rows: 1fr 100px;
+
 }
 
 
@@ -243,10 +249,69 @@ body{
 }
 
 
+.grid-container-one,
+.grid-container-two{
+    display: grid;
+    width: span;
+    height: span;
+    grid-template-rows: 50px max(280px, 30vw);
+    grid-template-columns: 50px max(280px, 30vw);
+    border: 3px solid fuchsia;
+    border-radius: 15px;
+    background-color: rgba(0, 0, 0, 0.377);
+    padding: 10px;
+}
+
+.grid-container-one{
+    grid-template-areas: 
+    ". x-axis"
+    "y-axis player1Grid";
+}
+
+.grid-container-two{
+    grid-template-areas: 
+    ". x-axis"
+    "y-axis player2Grid";
+}
+
+.x-axis{
+    display: grid;
+    grid-area: x-axis;
+    color: white;
+    grid-auto-flow: column;
+    grid-template-columns: repeat(10, 1fr);
+}
+
+.x-axis > div {
+    /* text-align: center; */
+    font-size: 20px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+.y-axis{
+
+    display: grid;
+    grid-area: y-axis;
+    color: white;
+    font-size: 10px;
+    grid-template-rows: repeat(10, 1fr);
+}
+
+.y-axis > div {
+    /* text-align: center; */
+    font-size: 20px;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+}
+
+
 .player1-grid,
 .player2-grid{
 
-    --height-and-width: max(330px, 30vw);
+    --height-and-width: max(280px, 30vw);
     --border-size: 2px solid greenyellow;
 
     border: var(--border-size);
@@ -258,16 +323,32 @@ body{
 
 }
 
+.player1-grid{
+    grid-area: player1Grid;
+}
+
+.player2-grid{
+    grid-area: player2Grid;
+}
 
 .player1-label,
 .player2-label{
     color: white;
-    width: 100%;
+    width: 150px;
     border: 2px solid blanchedalmond;
     text-align: center;
     /* padding: 10px; */
+    font-size: 20px;
+    height: 60px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    border-radius: 15px;
 }
 
+.show-turn{
+    background-color: greenyellow;
+}
 
 .grid-column{
     display: grid;
@@ -305,6 +386,37 @@ body{
 @media (max-width: 770px){
     /* change player font position */
 
+    .player-div{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(2, 1fr);
+    }
+
+    .player1-div,
+    .player2-div{
+        padding: 20px 5px 20px 5px;
+    }
+
+    .player2-div {
+        grid-template-rows: 100px 1fr;
+    }
+
+
+
+    .grid-container-one,
+    .grid-container-two{
+        width: span;
+        height: span;
+        grid-template-rows: 20px 280px;
+        grid-template-columns: 20px 280px;
+        padding: 10px;
+    }
+
+    .x-axis > div,
+    .y-axis > div{
+        font-size: 12px;
+    }
+
+
     .player1-grid,
     .player2-grid{
         
@@ -320,7 +432,7 @@ body{
         order: 1;
     }
 
-    .player2-grid{
+    .grid-container-two{
         order: 2;
     }
 

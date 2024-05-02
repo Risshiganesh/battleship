@@ -51,8 +51,14 @@ function gameStart () {
     const computerOption = document.querySelector('.computer-option');
     const realPlayerOption = document.querySelector('.real-player-option');
 
+    
+
 
     const restartButton = document.querySelector('.restart-button');
+
+    const player1Label = document.querySelector('.player1-label');
+
+    const player2Label = document.querySelector('.player2-label');
     
     
     startButton.addEventListener('click', function(e){
@@ -89,6 +95,10 @@ function gameStart () {
 
         const gameOver = document.querySelector('.game-over');
         gameOver.classList.remove('enable-game-over');
+        updateHeader("Player 1 goes first");
+        player1Label.classList.add('show-turn');
+
+        player2Label.classList.remove('show-turn');
         gameFlow()
     })
 
@@ -326,6 +336,10 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
         const passDeviceMsg = document.querySelector('.pass-device-message');
 
+        const player1Label = document.querySelector('.player1-label');
+
+        const player2Label = document.querySelector('.player2-label');
+
         const currentPlayerTurn = turnState.getTurn();
 
         // const gameIsOver = turnState.isGameOver();
@@ -387,6 +401,18 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
             // Create new div for pass the device msg?
             passDeviceMsg.textContent = `It's a ${result.toUpperCase()}! \r\n Pass the device to Player 2`;
 
+            if (player.type === "real") {
+
+                player1Label.classList.remove('show-turn');
+
+                player2Label.classList.add('show-turn');
+                
+            }
+
+            
+
+            
+
             
             updateHeader(`Player 1 chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toUpperCase()}`);
 
@@ -395,6 +421,16 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         if (currentPlayerTurn === "player2") {
 
             passDeviceMsg.textContent = `It's a ${result.toUpperCase()}! \r\n Pass the device to Player 1`;
+
+
+            if (player.type === "real") {
+
+                player1Label.classList.add('show-turn');
+
+                player2Label.classList.remove('show-turn');
+            }
+
+            
 
 
             updateHeader(`Player 2 chose ${letterArrayX[x]}${numberArrayY[y]} and it's a ${result.toUpperCase()}`);
