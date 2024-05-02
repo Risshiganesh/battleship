@@ -2,47 +2,6 @@ import { gameFlow, turnState, setPlayer2Type } from "./gameFlow";
 
 import { updateHeader } from "./renderDOM";
 
-// How do you render the board?
-
-// select the player border grids first.
-
-// then import and loop through ownGrid and hitmap
-
-// this function has to be reusable for both player 1 and player 2.
-
-// it will check whose turn and type of player the player is playing with.
-
-// if playing againts ai it will only ever render the ai player's hitmap. never renders ai player's onwGrid.
-
-// if playing against another player after a player attacks, a fixed black div will cover up the entire screen and show a text of whether the player hit or miss, also shows whose turn is next with a button labelled "start turn". with the next player's grids and hitmaps alreadt rendered behind the black div.
-
-// ships are displayed in dark grey colour
-
-// hits are displayed in red
-
-// misses are displayed in white
-
-
-
-
-// first you must get ownGrid of player one and display the grids correctly.
-
-// Then you must get player two's hitmap and display the grids correctly.
-
-// after that you must create another funtion to display ships correctly. -add classes to the correct grids.
-
-// Then you create another function to render hitmap correctly.
-
-// Hitmap will be displayed on player one grid and player two grid.
-
-// Add event listeners to the grids. (DONE)
-
-
-// add coordinates as an object "const coords = {x:0,y:0}" inside addeventlistener callback function? use columnIndex annd rowIndex? (DONE)
-
-
-
-
 
 function gameStart () {
     const startMenu = document.querySelector('.start-menu');
@@ -108,31 +67,43 @@ function gameStart () {
 
 
 // refactor if necessary
-function populatePlayer1Board (player1){
-    const player1Grid = document.querySelector('.player1-grid');
+function populatePlayerBoard (player, playerNumber){
+
+    let playerGrid;
+
+    console.log(player)
+
+    if (playerNumber === "player1") {
+        playerGrid = document.querySelector('.player1-grid');
+    }
+    
+    if (playerNumber === "player2") {
+        console.log("TEST")
+        playerGrid = document.querySelector('.player2-grid');
+    }
 
 
     
     function displayGrids() {
-        createGrids(player1, player1Grid, "player1");
+        createGrids(player, playerGrid, playerNumber);
     }
 
     function deleteGrids() {
-        while (player1Grid.firstChild) {
-            player1Grid.firstChild.remove()
+        while (playerGrid.firstChild) {
+            playerGrid.firstChild.remove()
         }
     }
 
 
     function showShips() {
-        displayShips(null,player1, player1Grid);
+        displayShips(null,player, playerGrid);
     }
     
 
 
 
     function showHitMap() {
-        displayHitMap(player1, player1Grid);
+        displayHitMap(player, playerGrid);
     }
 
    
@@ -145,45 +116,12 @@ function populatePlayer1Board (player1){
         deleteGrids,
         showShips,
         showHitMap,
-        player1
+        player
     }
 
 }
 
-// Merge it into one function - above
-function populatePlayer2Board (player2) {
 
-    const player2Grid = document.querySelector('.player2-grid');
-
-    function displayGrids () {
-        createGrids(player2, player2Grid, "player2");
-    }
-
-    function deleteGrids() {
-        while (player2Grid.firstChild) {
-            player2Grid.firstChild.remove()
-        }
-    }
-
-    function showShips () {
-        displayShips(null,player2, player2Grid);
-    }
-    
-
-    function showHitMap () {
-        displayHitMap(player2, player2Grid);
-    }
-
-    return {
-        displayGrids,
-        deleteGrids,
-        showShips,
-        showHitMap,
-        player2
-    }
-    
-    
-}
 
 
 
@@ -342,13 +280,6 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
         const currentPlayerTurn = turnState.getTurn();
 
-        // const gameIsOver = turnState.isGameOver();
-
-        // if (gameIsOver) {
-
-
-        // }
-
 
 
         
@@ -374,20 +305,7 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         }
 
 
-        // Remove later is pass device message works correctly.
-        // if (player.type === "real") {
-        //     passDeviceDiv.classList.add('show-pass-device');
 
-        //     if (currentPlayerTurn === "player1") {
-        //         passDeviceMsg.textContent = "Pass the device to Player 2";
-        //     }
-           
-        //     if (currentPlayerTurn === "player2") {
-        //         passDeviceMsg.textContent = "Pass the device to Player 1";
-        //     }
-
-            
-        // }
 
         
 
@@ -461,7 +379,6 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 }
 
 export{
-    populatePlayer1Board,
-    populatePlayer2Board,
+    populatePlayerBoard,
     gameStart
 }

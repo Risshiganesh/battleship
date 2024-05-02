@@ -10,12 +10,13 @@ body{
     width: 100%;
     background-color: black;
     position: relative;
+    font-family: Arial, Helvetica, sans-serif;
     
 }
 
 .game-title {
     font-size: 40px;
-    font-family: Arial, Helvetica, sans-serif;
+    /* font-family: Arial, Helvetica, sans-serif; */
     font-weight: 900;
     color: white;
 }
@@ -53,8 +54,7 @@ body{
 .player-type-title{
     color: white;
     text-align: center;
-    font-size: 30px;
-    font-family: serif;
+    font-size: 25px;
     font-weight: 900;
     /* vertical-align: middle; */
 }
@@ -69,15 +69,23 @@ body{
 
 .player-type-div > button {
     width: 130px;
-    height: 40px;
+    height: 50px;
+    border-radius: 15px;
+    font-size: 17px;
 }
 
 .computer-option {
     justify-self: end;
+    background-color: cyan;
+    border: 3px solid darkslateblue;
+    color: rgb(33, 28, 62);
 }
 
 .real-player-option {
     justify-self: start;
+    background-color: yellow;
+    border: 3px solid darkgoldenrod;
+    color: rgb(104, 57, 0);
 }
 
 .start-button-div {
@@ -87,17 +95,23 @@ body{
 }
 
 .start-button {
-    width: 150px;
+    width: 290px;
     height: 50px;
+    border-radius: 15px;
+    background-color: greenyellow;
+    border: 3px solid darkgreen;
+    color: rgb(0, 49, 0);
+    font-weight: bold;
+    font-size: 17px;
 }
 
 
 .pass-device{
-    border: 3px solid pink;
+    /* border: 3px solid pink; */
     position: fixed;
     width: 100%;
     height: 100%;
-    background-color: gray;
+    background-color: black;
     
     padding: 20%;
     z-index: 2;
@@ -115,28 +129,33 @@ body{
 
 
 .pass-device-message {
-    border: 3px solid red;
+    border: 1px solid red;
     width: 100%;
     height: 100%;
     display: grid;
     justify-items: center;
     align-items: center;
+    color: white;
+    border-radius: 15px;
 
 
     text-align: center;
     vertical-align: middle;
     padding: 50px;
-    font-size: 40px;
+    font-size: 30px;
+    /* font-family: Arial, Helvetica, sans-serif; */
     /* line-height: 100%; */
 }
 
 .pass-device-button {
-    border: 3px solid blue;
+    border: 3px solid darkgreen;
     width: 200px;
     height: 70px;
     font-size: 25px;
     border-radius: 15px;
     align-self: start;
+    background-color: greenyellow;
+    color: black;
 }
 
 .main-container {
@@ -145,9 +164,9 @@ body{
 
     width: 100%;
     height: 100%;
-    border: 2px solid red;
+    /* border: 2px solid red; */
     display: grid;
-    grid-template-rows: 100px 1fr 50px;
+    grid-template-rows: 120px 1fr 50px;
 }
 
 .top-div {
@@ -158,12 +177,21 @@ body{
 }
 
 .header-div {
-    width: 100%;
+    align-self: start;
+    width: 80%;
 
-    border: 2px solid blue;
-    color: white;
+    border: 3px solid darkblue;
+    background-color: rgba(0, 0, 155, 0.501);
+    border-top: none;
+    border-radius: 0px 0px 15px 15px;
+    color: lightblue;
     text-align: center;
     font-size: 20px;
+    font-weight: 900;
+    height: 50px;
+    display: grid;
+    justify-items: center;
+    align-items: center;
 
     /* padding: 30px; */
 }
@@ -172,6 +200,11 @@ body{
     width: 130px;
     height: 40px;
     border-radius: 10px;
+    background-color: magenta;
+    border: 3px solid darkorchid;
+    color: rgb(47, 0, 67);
+    font-size: 15px;
+    font-weight: 900;
 }
 
 
@@ -180,7 +213,7 @@ body{
 .player-div {
     width: 100%;
     height: 100%;
-    border: 2px solid pink;
+    /* border: 2px solid pink; */
     /* background-color: yellow; */
     display: grid;
     /* grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); */
@@ -203,12 +236,22 @@ body{
 .footer-div {
     width: 100%;
     height: 100%;
-    border: 2px solid green;
+    border: 3px solid green;
     z-index: 1; 
     color: white;
     display: grid;
     justify-items: center;
     align-items: center;
+    border-radius: 15px 15px 0px 0px;
+    border-bottom: none;
+}
+
+.footer-link:link{
+    color: white;
+}
+
+.footer-link:visited{
+    color: grey;
 }
 
 .footer-link:hover{
@@ -229,7 +272,7 @@ body{
 .player1-div {
     width: 100%;
     height: 100%;
-    border: 2px solid lightgreen;
+    /* border: 2px solid lightgreen; */
     display: grid;
     justify-items: center;
     align-items: center;
@@ -240,7 +283,7 @@ body{
 .player2-div {
     width: 100%;
     height: 100%;
-    border: 2px solid lightgoldenrodyellow;
+    /* border: 2px solid lightgoldenrodyellow; */
     display: grid;
     justify-items: center;
     align-items: center;
@@ -312,7 +355,7 @@ body{
 .player2-grid{
 
     --height-and-width: max(280px, 30vw);
-    --border-size: 2px solid greenyellow;
+    --border-size: 1px solid turquoise;
 
     border: var(--border-size);
     width: var(--height-and-width);
@@ -344,10 +387,13 @@ body{
     justify-items: center;
     align-items: center;
     border-radius: 15px;
+    font-weight: bold;
 }
 
 .show-turn{
     background-color: greenyellow;
+    color: black;
+    border: 3px solid darkgreen;
 }
 
 .grid-column{
@@ -359,7 +405,7 @@ body{
 
 .grid-row{
 
-    border: 2px solid turquoise;
+    border: 1px solid turquoise;
     
 }
 .grid-row:hover{
