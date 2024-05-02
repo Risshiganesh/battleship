@@ -70,7 +70,6 @@ function createDOM () {
             e.preventDefault();
             passDeviceDiv.classList.remove('show-pass-device');
 
-            // console.log("Test")
         })
 
 

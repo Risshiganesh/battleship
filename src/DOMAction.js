@@ -71,14 +71,14 @@ function populatePlayerBoard (player, playerNumber){
 
     let playerGrid;
 
-    console.log(player)
+
 
     if (playerNumber === "player1") {
         playerGrid = document.querySelector('.player1-grid');
     }
     
     if (playerNumber === "player2") {
-        console.log("TEST")
+  
         playerGrid = document.querySelector('.player2-grid');
     }
 
@@ -134,17 +134,16 @@ function createGrids (player, playerDOMGrid, isPlayer) {
 
         const gridColumn = document.createElement('div');
         gridColumn.classList.add("grid-column");
-        // gridColumn.textContent = columnIndex
+
         playerDOMGrid.append(gridColumn)
         
 
 
         for (let rowIndex = 9; rowIndex >= 0; rowIndex--) {
-            // const element = column[rowIndex];
-            // console.log("TEST")
+  
             const gridRow = document.createElement('div');
             gridRow.classList.add("grid-row");
-            // gridRow.textContent = rowIndex;
+
             gridColumn.append(gridRow);
 
            clickBoard(player, gridRow, columnIndex, rowIndex, isPlayer)
@@ -183,14 +182,11 @@ function displayShips(toDisplay, player, playerDOMGrid) {
 
                 const rowNodes = playerColumns[colIndex].childNodes;
 
-                // console.log(rowNodes)
-
-                // const reversedRowNode = rowNodes.reverse();
-
+ 
                 for (let rowIndex = 9; rowIndex >= 0; rowIndex--) {
                     const row = rows[rowIndex];
                     if (row) {
-                        // console.log(true)
+                
 
                         rowNodes[nodesRowIterator].classList.add('ship-located')
 
@@ -222,7 +218,6 @@ function displayHitMap(player,playerDOMGrid) {
         const playerColumns = playerDOMGrid.childNodes
 
 
-        // console.log(player.board.hitMap)
         
         for (let colIndex = 0; colIndex < player.board.hitMap.length; colIndex++) {
             const rows = player.board.hitMap[colIndex];
@@ -236,7 +231,7 @@ function displayHitMap(player,playerDOMGrid) {
             for (let rowIndex = 9; rowIndex >= 0; rowIndex--) {
                 const row = rows[rowIndex];
                 if (row === "Hit") {
-                    // console.log(true)
+                   
 
                     rowNodes[nodesRowIterator].classList.add('ship-is-hit')
 
@@ -245,7 +240,7 @@ function displayHitMap(player,playerDOMGrid) {
 
 
                 if (row === "Miss") {
-                    // console.log(true)
+                   
 
                     rowNodes[nodesRowIterator].classList.add('attack-missed')
 
@@ -293,12 +288,12 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
 
         const x = columnIndex
         const y = rowIndex;
-        console.log(x,y);
+      
 
-        console.log(player.board.hitMap[x][y])
+     
 
         if (player.board.hitMap[x][y] === "Miss" || player.board.hitMap[x][y] === "Hit") {
-            // console.log("Grid already chosen")
+          
 
             updateHeader("Grid already chosen");
             return;
@@ -367,7 +362,7 @@ function clickBoard (player, grid, columnIndex, rowIndex, isPlayer) {
         if (player.board.ownGrid[x][y]) {
   
             grid.classList.add('ship-is-hit')
-            console.log(player.board.ownGrid[x][y].getHits())
+         
      
             return
         }

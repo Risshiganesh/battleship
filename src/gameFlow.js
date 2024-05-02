@@ -95,10 +95,10 @@ const turnState = (function () {
         const passDeviceButton = document.querySelector('.pass-device-button');
         
         const player1Loses = player1Board.player.board.allSunk();
-        console.log(player1Loses);
+   
 
         const player2Loses = player2Board.player.board.allSunk();
-        console.log(player2Loses);
+    
 
         if (player1Loses) {
             ``
@@ -179,33 +179,7 @@ function gameFlow () {
     const allPlayer1Ships = [player1Carrier, player1Battleship, player1Destroyer, player1Submarine, player1PatrolBoat];
 
     const allPlayer2Ships = [player2Carrier, player2Battleship, player2Destroyer, player2Submarine, player2PatrolBoat]
-    // 
-    // 
-    // 
-    // 
-    // 
-    
 
-    // Check all DOM modules as to whether or not you need to write tests for any of the functions. (Anything that runs because of DOM event should not be tested, only pure logic should be tested)
-
-
-  
-
-
-    
-    console.log(player1.board.placeShip({x:9,y:9}, "north", player1Carrier));
-    player1.board.placeShip({x:0,y:0}, "east", player1Battleship);
-    player1.board.placeShip({x:5,y:5}, "east", player1Destroyer);
-    player1.board.placeShip({x:2,y:2}, "east", player1Submarine);
-    player1.board.placeShip({x:9,y:0}, "south", player1PatrolBoat);
-
-
-
-    console.log(player2.board.placeShip({x:9,y:9}, "north", player2Carrier));
-    player2.board.placeShip({x:0,y:0}, "east", player2Battleship);
-    player2.board.placeShip({x:5,y:5}, "east", player2Destroyer);
-    player2.board.placeShip({x:2,y:2}, "east", player2Submarine);
-    player2.board.placeShip({x:9,y:0}, "south", player2PatrolBoat);
 
     function placeAllShips (player, shipsArray){
 
@@ -222,8 +196,6 @@ function gameFlow () {
             }
 
             if (result === "Placement_success") {
-
-                console.log("All ships successfully placed");
                 return;
             }
         });
@@ -259,12 +231,15 @@ function gameFlow () {
 
     }
 
+    placeAllShips(player1, allPlayer1Ships);
+    placeAllShips(player2, allPlayer2Ships);
+
 
 
     player1Board = populatePlayerBoard(player1, "player1");
     player2Board = populatePlayerBoard(player2, "player2");
 
-    console.log(player2Board)
+   
 
    
 
@@ -290,11 +265,10 @@ function gameFlow () {
 
 
 
-let test = 0
 
 function computerAttacks (player) {
 
-    console.log("Computer attacks");
+  
 
     const x = Math.floor(Math.random() * 10);
 
@@ -302,15 +276,13 @@ function computerAttacks (player) {
 
     const result = player.board.receiveAttack(x,y)
 
-    // console.log("Coords: "+x,y)
-    // console.log(result)
+  
     if (result === "Already Hit" || result == "Already Miss") {
          return computerAttacks(player)
     }
 
    
 
-    // console.log("Computer has successfully attacked.");
 
     const letterArrayX = ["A","B","C","D","E","F","G","H","I","J"];
 
@@ -320,8 +292,7 @@ function computerAttacks (player) {
     turnState.updateTurn();
 
    
-    test++
-    console.log('Computer attacks:' + test)
+  
     return 
 }
 
